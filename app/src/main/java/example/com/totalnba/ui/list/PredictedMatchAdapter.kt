@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.jakewharton.rxrelay2.BehaviorRelay
 import example.com.totalnba.R
-import example.com.totalnba.data.PredictedMatch
+import example.com.totalnba.data.network.model.PredictedMatch
 import example.com.totalnba.util.disposedBy
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -27,7 +27,7 @@ class PredictedMatchAdapter(var onItemClicked: ItemClickedlambda): RecyclerView.
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PredictedMatchViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.predicted_list_item, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.list_item, parent, false)
         val viewHolder = PredictedMatchViewHolder(view)
 
         view.setOnClickListener { v -> onItemClicked(v, viewHolder.adapterPosition) }
