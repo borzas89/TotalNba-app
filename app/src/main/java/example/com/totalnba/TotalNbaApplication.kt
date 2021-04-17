@@ -15,7 +15,6 @@ class TotalNbaApplication : Application() {
         Timber.plant(Timber.DebugTree())
 
         injector = DaggerAppComponent.builder()
-//            .applicationModule(ApplicationModule(this))
             .build()
     }
 

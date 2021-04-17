@@ -27,7 +27,7 @@ class PredictedMatchAdapter(var onItemClicked: ItemClickedlambda): RecyclerView.
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PredictedMatchViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.list_item, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.predicted_list_item, parent, false)
         val viewHolder = PredictedMatchViewHolder(view)
 
         view.setOnClickListener { v -> onItemClicked(v, viewHolder.adapterPosition) }

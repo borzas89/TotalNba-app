@@ -10,6 +10,8 @@ import androidx.recyclerview.widget.RecyclerView
 import example.com.totalnba.R
 import example.com.totalnba.arch.BaseFragment
 import example.com.totalnba.arch.getViewModelFromFactory
+import example.com.totalnba.arch.navigator
+import example.com.totalnba.ui.detail.PredictedDetailFragment
 import example.com.totalnba.util.disposedBy
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -39,10 +41,14 @@ class PredictedListFragment: BaseFragment<PredictedListViewModel>() {
     }
 
     private fun loadData(){
+//        viewModel.getAllPredictions().observeOn(AndroidSchedulers.mainThread())
+//            .subscribeOn(Schedulers.io())
+//            .subscribe { predictions -> adapter.predictions.accept(predictions) }
+//            .disposedBy(bag)
 
-        viewModel.getAllPredictions().observeOn(AndroidSchedulers.mainThread())
+        viewModel.predictions.observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
-            .subscribe { predictions -> adapter.predictions.accept(predictions) }
+            .subscribe { list -> adapter.predictions.accept(list) }
             .disposedBy(bag)
     }
 
@@ -64,5 +70,15 @@ class PredictedListFragment: BaseFragment<PredictedListViewModel>() {
 
     private fun rowTapped(position: Int) {
         println(adapter.predictions.value[position])
+
+        val homeTeam = adapter.predictions.value[position].homeTeam
+        val awayTeam = adapter.predictions.value[position].awayTeam
+
+        navigator?.add(PredictedDetailFragment.newInstance(homeTeam!!,awayTeam!!))
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        bag.clear()
     }
 }

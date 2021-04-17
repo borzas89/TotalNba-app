@@ -7,8 +7,8 @@ import retrofit2.http.GET
 
 interface TotalNbaApi {
 
-//    @GET("nba_predicted_scores.json")
-    @GET("api/predicted-matches/")
+    @GET("nba_predicted_scores.json")
+//    @GET("api/predicted-matches/")
     fun getPredictedMatches(): Single<List<PredictedMatch>>
 
     @GET("nba_overalls.json")

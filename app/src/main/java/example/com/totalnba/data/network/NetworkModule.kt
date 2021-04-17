@@ -13,8 +13,8 @@ import javax.inject.Singleton
 class NetworkModule {
 
     companion object {
-//  private const val API_URL = "http://totalstats.infora.hu/assets/json/"
-    private const val API_URL ="http://192.168.0.107:8080/"
+  private const val API_URL = "http://totalstats.infora.hu/assets/json/"
+//    private const val API_URL ="http://192.168.0.107:8080/"
     }
 
     @Provides

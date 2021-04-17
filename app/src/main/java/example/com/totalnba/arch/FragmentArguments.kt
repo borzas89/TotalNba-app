@@ -14,7 +14,7 @@ inline fun Fragment.requireArguments(): Bundle {
     return arguments ?: throw IllegalStateException("Fragment has no arguments Bundle.")
 }
 
-@Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
+
 inline fun Bundle.requireString(key: String): String {
-    return if (containsKey(key)) getString(key).toString() else throw IllegalStateException("Bundle has no key $key")
+    return if (containsKey(key)) getString( key ).toString() else throw IllegalStateException("Bundle has no key $key")
 }
