@@ -41,14 +41,9 @@ class PredictedListFragment: BaseFragment<PredictedListViewModel>() {
     }
 
     private fun loadData(){
-//        viewModel.getAllPredictions().observeOn(AndroidSchedulers.mainThread())
-//            .subscribeOn(Schedulers.io())
-//            .subscribe { predictions -> adapter.predictions.accept(predictions) }
-//            .disposedBy(bag)
-
         viewModel.predictions.observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
-            .subscribe { list -> adapter.predictions.accept(list) }
+            .subscribe { list -> adapter.updateData(list) }
             .disposedBy(bag)
     }
 
@@ -69,10 +64,10 @@ class PredictedListFragment: BaseFragment<PredictedListViewModel>() {
     }
 
     private fun rowTapped(position: Int) {
-        println(adapter.predictions.value[position])
+        println(adapter.predictions.get(position))
 
-        val homeTeam = adapter.predictions.value[position].homeTeam
-        val awayTeam = adapter.predictions.value[position].awayTeam
+        val homeTeam = adapter.predictions.get(position).homeTeam
+        val awayTeam = adapter.predictions.get(position).awayTeam
 
         navigator?.add(PredictedDetailFragment.newInstance(homeTeam!!,awayTeam!!))
     }

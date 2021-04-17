@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.jakewharton.rxrelay2.BehaviorRelay
 import example.com.totalnba.R
 import example.com.totalnba.data.network.model.PredictedMatch
+import example.com.totalnba.ui.detail.PredictedDetailFragment
+import example.com.totalnba.util.backgroundResolverId
 import example.com.totalnba.util.disposedBy
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -15,16 +17,8 @@ typealias ItemClickedlambda = (v: View, position: Int) -> Unit
 
 class PredictedMatchAdapter(var onItemClicked: ItemClickedlambda): RecyclerView.Adapter<PredictedMatchViewHolder>() {
 
-    internal val predictions = BehaviorRelay.createDefault(listOf<PredictedMatch>())
+    var predictions: List<PredictedMatch> = emptyList()
 
-    private val bag = CompositeDisposable()
-
-    init {
-        predictions.observeOn(AndroidSchedulers.mainThread())
-            .subscribe {
-                notifyDataSetChanged()
-            }.disposedBy(bag)
-    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PredictedMatchViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.predicted_list_item, parent, false)
@@ -36,11 +30,15 @@ class PredictedMatchAdapter(var onItemClicked: ItemClickedlambda): RecyclerView.
     }
 
     override fun onBindViewHolder(holder: PredictedMatchViewHolder, position: Int) {
-        val prediction = predictions.value[position]
-
+        val prediction = predictions.get(position)
         holder.configureWith(prediction)
     }
 
-    override fun getItemCount(): Int = predictions.value.size
+    override fun getItemCount(): Int = predictions.size
+
+    fun updateData(data: List<PredictedMatch>) {
+        this.predictions = data
+        notifyDataSetChanged()
+    }
 
 }

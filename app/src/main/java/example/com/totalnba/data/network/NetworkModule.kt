@@ -13,7 +13,7 @@ import javax.inject.Singleton
 class NetworkModule {
 
     companion object {
-  private const val API_URL = "http://totalstats.infora.hu/assets/json/"
+      private const val API_URL ="https://totalstat.herokuapp.com/"
 //    private const val API_URL ="http://192.168.0.107:8080/"
     }
 
@@ -23,7 +23,6 @@ class NetworkModule {
                 .addInterceptor(interceptor)
                 .build()
     }
-
 
     @Provides
     fun provideHttpLoggingInterceptor(): HttpLoggingInterceptor {
