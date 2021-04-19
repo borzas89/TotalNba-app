@@ -18,7 +18,7 @@ class PredictedDetailViewModel  @Inject constructor(
 
 ) : BaseViewModel() {
 
-    val overallList = BehaviorRelay.createDefault(listOf<Overall>())
+    private val overallList = BehaviorRelay.createDefault(listOf<Overall>())
 
     val homeTeam = ObservableField<String>()
     val awayTeam = ObservableField<String>()

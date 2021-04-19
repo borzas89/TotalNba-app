@@ -67,7 +67,6 @@ class PredictedDetailFragment: BaseFragment<PredictedDetailViewModel>() {
 
         viewModel.getOverallsByTeams(homeTeamName, awayTeamName)
 
-//        getResultsByTeamName()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -11,23 +12,29 @@ import example.com.totalnba.R
 import example.com.totalnba.arch.BaseFragment
 import example.com.totalnba.arch.getViewModelFromFactory
 import example.com.totalnba.arch.navigator
+import example.com.totalnba.databinding.FragmentPredictedListBinding
 import example.com.totalnba.ui.detail.PredictedDetailFragment
 import example.com.totalnba.util.disposedBy
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.rxkotlin.addTo
 import io.reactivex.schedulers.Schedulers
 
 class PredictedListFragment: BaseFragment<PredictedListViewModel>() {
 
     override fun provideViewModel() = getViewModelFromFactory()
+    private lateinit var binding : FragmentPredictedListBinding
 
     lateinit var adapter: PredictedMatchAdapter
     lateinit var recyclerView: RecyclerView
     private val bag = CompositeDisposable()
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-
-        return inflater.inflate(R.layout.fragment_predicted_list, container, false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        binding  = DataBindingUtil.inflate(
+                inflater, R.layout.fragment_predicted_list, container, false)
+        val view: View = binding.root
+        binding.viewmodel = provideViewModel()
+        return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
