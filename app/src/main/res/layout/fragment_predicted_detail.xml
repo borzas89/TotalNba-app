@@ -359,8 +359,35 @@
 
         </LinearLayout>
 
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:tabTextColor="@color/team_blue_grey"
+            app:tabSelectedTextColor="@color/white"
+            android:background="@color/team_purple">
+        </com.google.android.material.tabs.TabLayout>
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:visibility="@{viewmodel.isLoadingProgress() ? View.VISIBLE : View.GONE}"
+            android:layout_width="match_parent"
+            style="?android:attr/progressBarStyleLarge"
+            android:indeterminateTint="@color/team_purple"
+            android:layout_gravity="center_vertical"
+            android:layout_height="150dp"/>
 
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/resultRecyclerView"
+            tools:listitem="@layout/result_list_item"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            bind:hasFixedSize="@{true}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
     </LinearLayout>

@@ -16,35 +16,25 @@ class PredictedListViewModel  @Inject constructor(
 
 ) : BaseViewModel() {
 
-    internal val predictions = BehaviorRelay.createDefault(listOf<PredictedMatch>())
+    val predictions = BehaviorRelay.createDefault(listOf<PredictedMatch>())
     private val bag = CompositeDisposable()
 
-
     init {
-        gettingDatas()
-    }
-
-    fun getAllPredictions(): Single<List<PredictedMatch>> {
-        return api.getPredictedMatches()
-    }
-
-    fun gettingDatas(){
-        getAllPredictions().observeOn(AndroidSchedulers.mainThread())
+        api.getPredictedMatches().observeOn(AndroidSchedulers.mainThread())
                 .compose(applySingleTransformers())
                 .subscribeOn(Schedulers.io())
                 .subscribeBy(
                         onSuccess = { result ->
                             when (result) {
-                                 result -> predictions.accept(result)
+                                result -> predictions.accept(result)
                             }
 
                         }, onError = {
 
                 }
-
         )
+    }
 
-     }
 
     override fun onCleared() {
         super.onCleared()

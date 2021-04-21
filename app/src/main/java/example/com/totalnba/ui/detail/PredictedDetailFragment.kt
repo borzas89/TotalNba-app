@@ -4,14 +4,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.get
 import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.tabs.TabLayout
 import example.com.totalnba.R
 import example.com.totalnba.arch.BaseFragment
 import example.com.totalnba.arch.applyArgs
 import example.com.totalnba.arch.getViewModelFromFactory
 import example.com.totalnba.arch.requireString
 import example.com.totalnba.databinding.FragmentPredictedDetailBinding
-import example.com.totalnba.util.backgroundResolverId
 import example.com.totalnba.util.disposedBy
 import example.com.totalnba.util.imageResolverId
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -22,6 +26,9 @@ class PredictedDetailFragment: BaseFragment<PredictedDetailViewModel>() {
 
     override fun provideViewModel() = getViewModelFromFactory()
     private lateinit var binding : FragmentPredictedDetailBinding
+
+    lateinit var adapter: ResultAdapter
+    lateinit var recyclerView: RecyclerView
 
     private val bag = CompositeDisposable()
 
@@ -74,18 +81,65 @@ class PredictedDetailFragment: BaseFragment<PredictedDetailViewModel>() {
 
         initArguments()
 
+        recyclerView = binding.resultRecyclerView
+
+        attachUI()
+
         binding.imageHome.setImageResource(imageResolverId(homeTeamName))
         binding.imageAway.setImageResource(imageResolverId(awayTeamName))
 
+        binding.tabLayout.addTab(binding.tabLayout.newTab().setText("Home team"))
+        binding.tabLayout.addTab(binding.tabLayout.newTab().setText("Away team"))
+
+        binding.tabLayout.getTabAt(0)!!.select()
+        loadHomeResults()
+
+        binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            override fun onTabSelected(tab: TabLayout.Tab) {
+                when(tab.position){
+                    0 -> loadHomeResults()
+                    1 -> loadAwayResults()
+                    else -> loadHomeResults()
+                }
+            }
+            override fun onTabUnselected(tab: TabLayout.Tab) {}
+            override fun onTabReselected(tab: TabLayout.Tab) {}
+        })
+
+    }
+
+    private fun loadHomeResults(){
+        viewModel.getResultsByTeamName(homeTeamName)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe{ homeResults -> adapter.updateData(homeResults)}
+                .disposedBy(bag)
+
+    }
+
+    private fun loadAwayResults(){
+        viewModel.getResultsByTeamName(awayTeamName)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe{ awayResults -> adapter.updateData(awayResults)}
+                .disposedBy(bag)
     }
 
 
-    fun getResultsByTeamName(){
-        viewModel.getResultsByTeamName(homeTeamName)
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribeOn(Schedulers.io())
-            .subscribe{ homeResults -> viewModel.homeResults}
-            .disposedBy(bag)
+    private fun attachUI() {
+        val linearLayoutManager = LinearLayoutManager(context)
+        val dividerItemDecoration = DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
+
+        recyclerView.layoutManager = linearLayoutManager
+        recyclerView.setHasFixedSize(true)
+        recyclerView.addItemDecoration(dividerItemDecoration)
+
+        initializeListView()
+    }
+
+    private fun initializeListView() {
+        adapter = ResultAdapter()
+        recyclerView.adapter = adapter
     }
 
 

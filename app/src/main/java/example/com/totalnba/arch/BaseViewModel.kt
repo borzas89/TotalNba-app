@@ -17,7 +17,7 @@ open class BaseViewModel  : ViewModel() {
 
     val isLoading = loadingProcessor.value ?: false
 
-    val isLoadingStuff = ObservableField<Boolean>()
+    val isLoadingProgress = ObservableField<Boolean>()
 
     val isLoadingFlowable
         get() = loadingProcessor.wrap()
@@ -33,10 +33,10 @@ open class BaseViewModel  : ViewModel() {
         return SingleTransformer { upstream ->
             upstream
                     .doOnSubscribe {
-                        isLoadingStuff.set(true)
+                        isLoadingProgress.set(true)
                         showLoader() }
                     .doFinally {
-                        isLoadingStuff.set(false)
+                        isLoadingProgress.set(false)
                         stopLoader() }
         }
     }

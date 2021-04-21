@@ -8,7 +8,9 @@ import example.com.totalnba.data.network.model.Overall
 import example.com.totalnba.data.network.model.Result
 import example.com.totalnba.util.disposedBy
 import io.reactivex.Flowable
+import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
@@ -28,8 +30,6 @@ class PredictedDetailViewModel  @Inject constructor(
 
     val matchTitle = ObservableField<String>()
 
-    val homeResults : List<Result> = listOf<Result>()
-
     private val bag = CompositeDisposable()
 
     fun getOverallsByTeams(homeName: String, awayName: String) {
@@ -45,6 +45,7 @@ class PredictedDetailViewModel  @Inject constructor(
 
     fun getResultsByTeamName(teamName: String) : Flowable<List<Result>> {
     return api.getResultsByTeamName(teamName)
+            .compose(applySingleTransformers())
             .subscribeOn(Schedulers.io())
             .toFlowable()
     }

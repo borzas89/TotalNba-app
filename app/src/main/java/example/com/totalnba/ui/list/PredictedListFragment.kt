@@ -40,7 +40,7 @@ class PredictedListFragment: BaseFragment<PredictedListViewModel>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        recyclerView = view.findViewById(R.id.predictionRecyclerView);
+        recyclerView = binding.predictionRecyclerView
 
         attachUI()
 
