@@ -20,7 +20,10 @@ class PredictedDetailViewModel  @Inject constructor(
 
 ) : BaseViewModel() {
 
-    private val overallList = BehaviorRelay.createDefault(listOf<Overall>())
+    val overallList = BehaviorRelay.createDefault(listOf<Overall>())
+
+    val homeResultList = BehaviorRelay.createDefault(listOf<Result>())
+    val awayResultList = BehaviorRelay.createDefault(listOf<Result>())
 
     val homeTeam = ObservableField<String>()
     val awayTeam = ObservableField<String>()
@@ -42,14 +45,40 @@ class PredictedDetailViewModel  @Inject constructor(
             .disposedBy(bag)
     }
 
+    fun getHomeResults(homeTeam: String){
+        api.getResultsByTeamName(homeTeam).observeOn(AndroidSchedulers.mainThread())
+                .compose(applySingleTransformers())
+                .subscribeOn(Schedulers.io())
+                .subscribeBy(
+                        onSuccess = { result ->
+                            when (result) {
+                                result -> homeResultList.accept(result)
+                            }
 
-    fun getResultsByTeamName(teamName: String) : Flowable<List<Result>> {
-    return api.getResultsByTeamName(teamName)
-            .compose(applySingleTransformers())
-            .subscribeOn(Schedulers.io())
-            .toFlowable()
+                        }, onError = {
+
+                }
+       )
+
     }
 
+    fun getAwayResults(awayTeam: String){
+        api.getResultsByTeamName(awayTeam).observeOn(AndroidSchedulers.mainThread())
+                .compose(applySingleTransformers())
+                .subscribeOn(Schedulers.io())
+                .subscribeBy(
+                        onSuccess = { result ->
+                            when (result) {
+                                result -> awayResultList.accept(result)
+                            }
+
+                        }, onError = {
+
+                }
+                )
+
+    }
+    
 
     override fun onCleared() {
         super.onCleared()

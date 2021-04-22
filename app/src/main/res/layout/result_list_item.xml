@@ -14,6 +14,17 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
+            <TextView
+                android:id="@+id/eventDate"
+                android:layout_weight="1"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                tools:text="05.04" />
 
             <TextView
                 android:id="@+id/teamHome"
@@ -24,7 +35,9 @@
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 android:textSize="16sp"
-                tools:text="LA Clippers -" />
+                android:maxLines="2"
+                android:lines="2"
+                tools:text="LA Clippers" />
 
             <TextView
                 android:id="@+id/teamAway"
@@ -34,24 +47,26 @@
                 android:textAlignment="center"
                 android:textColor="@color/black"
                 android:textStyle="bold"
+                android:maxLines="2"
+                android:lines="2"
                 android:textSize="16sp"
                 tools:text="Chicago Bulls" />
 
             <TextView
-                android:id="@+id/scoreHome"
                 android:layout_weight="1"
+                android:id="@+id/scoreHome"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAlignment="center"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                tools:text="113 :" />
+                tools:text="113" />
 
 
             <TextView
-                android:id="@+id/scoreAway"
                 android:layout_weight="1"
+                android:id="@+id/scoreAway"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAlignment="center"

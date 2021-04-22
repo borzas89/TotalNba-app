@@ -74,6 +74,9 @@ class PredictedDetailFragment: BaseFragment<PredictedDetailViewModel>() {
 
         viewModel.getOverallsByTeams(homeTeamName, awayTeamName)
 
+        viewModel.getHomeResults(homeTeamName)
+        viewModel.getAwayResults(awayTeamName)
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -109,8 +112,7 @@ class PredictedDetailFragment: BaseFragment<PredictedDetailViewModel>() {
     }
 
     private fun loadHomeResults(){
-        viewModel.getResultsByTeamName(homeTeamName)
-                .observeOn(AndroidSchedulers.mainThread())
+        viewModel.homeResultList.observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe{ homeResults -> adapter.updateData(homeResults)}
                 .disposedBy(bag)
@@ -118,8 +120,7 @@ class PredictedDetailFragment: BaseFragment<PredictedDetailViewModel>() {
     }
 
     private fun loadAwayResults(){
-        viewModel.getResultsByTeamName(awayTeamName)
-                .observeOn(AndroidSchedulers.mainThread())
+        viewModel.awayResultList.observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe{ awayResults -> adapter.updateData(awayResults)}
                 .disposedBy(bag)
