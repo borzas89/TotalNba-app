@@ -79,8 +79,9 @@ class PredictedListFragment: BaseFragment<PredictedListViewModel>() {
         navigator?.add(PredictedDetailFragment.newInstance(homeTeam!!,awayTeam!!))
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
+    override fun onDestroyView(){
+        super.onDestroyView()
         bag.clear()
     }
+
 }

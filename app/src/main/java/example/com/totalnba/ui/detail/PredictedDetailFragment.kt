@@ -143,6 +143,11 @@ class PredictedDetailFragment: BaseFragment<PredictedDetailViewModel>() {
         recyclerView.adapter = adapter
     }
 
+    override fun onDestroyView(){
+        super.onDestroyView()
+        bag.clear()
+    }
+
 
 
 
