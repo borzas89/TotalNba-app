@@ -1,15 +1,20 @@
 package example.com.totalnba.data.network.model
 
-
 import com.google.gson.annotations.SerializedName;
 
 class PredictedMatch {
 
-    @SerializedName("homeTeam")
+    @SerializedName("homeTeamName")
     val homeTeam: String? = null
 
-    @SerializedName("awayTeam")
+    @SerializedName("awayTeamName")
     val awayTeam: String? = null
+
+    @SerializedName("homeTeamAlias")
+    val homeAlias: String? = null
+
+    @SerializedName("awayTeamAlias")
+    val awayAlias: String? = null
 
     @SerializedName("predictedScore")
     val predictedScore: Double? = null
@@ -19,4 +24,16 @@ class PredictedMatch {
 
     @SerializedName("predictedAwayScore")
     val predictedAwayScore: Double? = null
+
+    @SerializedName("predictedTotal")
+    val predictedTotal: Double? = null
+
+    @SerializedName("spread")
+    val spread: Double? = null
+
+    @SerializedName("weekName")
+    val weekName: String? = null
+
+    @SerializedName("weekNumber")
+    val weekNumber: Int? = null
 }

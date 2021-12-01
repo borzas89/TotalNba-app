@@ -5,13 +5,16 @@ import example.com.totalnba.data.network.model.PredictedMatch
 import example.com.totalnba.data.network.model.Result
 import io.reactivex.Single
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
-
 
 interface TotalNbaApi {
 
-    @GET("api/predicted-matches/")
+    @GET("api/prediction/all-prediction/")
     fun getPredictedMatches(): Single<List<PredictedMatch>>
+
+    @GET("api/prediction/week/{week}/")
+    fun getPredictedMatchesByWeek(@Path("week") weekName: String): Single<List<PredictedMatch>>
 
     @GET("api/api/results/all-overalls/")
     fun getAverageOveralls(): Single<List<Overall>>
@@ -28,5 +31,4 @@ interface TotalNbaApi {
 
     @GET("api/results/all-results-by-team")
     fun getResultsByTeamName(@Query("teamName") teamName: String): Single<List<Result>>
-
 }

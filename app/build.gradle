@@ -8,12 +8,15 @@ android {
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
 
+
     defaultConfig {
         applicationId "example.com.totalnba"
         minSdkVersion 19
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
+
+        multiDexEnabled true
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -27,8 +30,13 @@ android {
     }
 
     buildFeatures {
+        viewBinding true
+    }
+
+    buildFeatures {
         dataBinding true
     }
+
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -75,4 +83,6 @@ dependencies {
 
     // Timber
     implementation 'com.jakewharton.timber:timber:4.7.1'
+
+    implementation 'joda-time:joda-time:2.10.10'
 }
