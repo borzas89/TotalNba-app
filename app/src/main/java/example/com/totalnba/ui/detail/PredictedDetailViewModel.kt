@@ -7,18 +7,16 @@ import example.com.totalnba.data.network.TotalNbaApi
 import example.com.totalnba.data.network.model.Overall
 import example.com.totalnba.data.network.model.Result
 import example.com.totalnba.util.disposedBy
-import io.reactivex.Flowable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
+class PredictedDetailViewModel @Inject constructor(
+    private val api: TotalNbaApi,
 
-class PredictedDetailViewModel  @Inject constructor(
-    private val api: TotalNbaApi
-
-) : BaseViewModel() {
+    ) : BaseViewModel() {
 
     val overallList = BehaviorRelay.createDefault(listOf<Overall>())
 
@@ -36,55 +34,51 @@ class PredictedDetailViewModel  @Inject constructor(
     private val bag = CompositeDisposable()
 
     fun getOverallsByTeams(homeName: String, awayName: String) {
-        api.getOverallByTeams(homeName,awayName)
+        api.getOverallByTeams(homeName, awayName)
             .subscribeOn(Schedulers.io())
-            .subscribe { overall -> overallList.accept(overall)
-               homeOverall.set(overall[0])
-               awayOverall.set(overall[1])
+            .subscribe { overall ->
+                overallList.accept(overall)
+                homeOverall.set(overall[0])
+                awayOverall.set(overall[1])
             }
             .disposedBy(bag)
     }
 
-    fun getHomeResults(homeTeam: String){
+    fun getHomeResults(homeTeam: String) {
         api.getResultsByTeamName(homeTeam).observeOn(AndroidSchedulers.mainThread())
-                .compose(applySingleTransformers())
-                .subscribeOn(Schedulers.io())
-                .subscribeBy(
-                        onSuccess = { result ->
-                            when (result) {
-                                result -> homeResultList.accept(result)
-                            }
+            .compose(applySingleTransformers())
+            .subscribeOn(Schedulers.io())
+            .subscribeBy(
+                onSuccess = { result ->
+                    when (result) {
+                        result -> homeResultList.accept(result)
+                    }
 
-                        }, onError = {
+                }, onError = {
 
                 }
-       )
+            )
 
     }
 
-    fun getAwayResults(awayTeam: String){
+    fun getAwayResults(awayTeam: String) {
         api.getResultsByTeamName(awayTeam).observeOn(AndroidSchedulers.mainThread())
-                .compose(applySingleTransformers())
-                .subscribeOn(Schedulers.io())
-                .subscribeBy(
-                        onSuccess = { result ->
-                            when (result) {
-                                result -> awayResultList.accept(result)
-                            }
+            .compose(applySingleTransformers())
+            .subscribeOn(Schedulers.io())
+            .subscribeBy(
+                onSuccess = { result ->
+                    when (result) {
+                        result -> awayResultList.accept(result)
+                    }
 
-                        }, onError = {
+                }, onError = {
 
                 }
-                )
-
+            )
     }
-    
 
     override fun onCleared() {
         super.onCleared()
         bag.clear()
     }
-
-
-
 }

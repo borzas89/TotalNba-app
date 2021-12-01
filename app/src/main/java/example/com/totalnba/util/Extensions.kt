@@ -1,10 +1,6 @@
 package example.com.totalnba.util
 
-import androidx.databinding.Observable
-import androidx.databinding.ObservableField
 import example.com.totalnba.R
-import io.reactivex.BackpressureStrategy
-import io.reactivex.Flowable
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import java.math.BigDecimal
@@ -47,7 +43,7 @@ fun imageResolverId(key: String) : Int {
     teamsMap["Utah Jazz" ] = R.drawable.uta
     teamsMap["Washington Wizards"] =  R.drawable.was
 
-    return teamsMap.get(key)!!.toInt()
+    return teamsMap[key]!!.toInt()
 }
 
 fun backgroundResolverId(key: String) : Int {
@@ -83,25 +79,9 @@ fun backgroundResolverId(key: String) : Int {
     colorsMap["Utah Jazz" ] = R.color.team_blue_dark
     colorsMap["Washington Wizards"] =  R.color.team_blue_dark
 
-    return colorsMap.get(key)!!.toInt()
+    return colorsMap[key]!!.toInt()
 }
 
 fun roundingDouble(value: Double): String{
     return BigDecimal(value).setScale(2, RoundingMode.HALF_EVEN).toString()
-}
-
-fun <T> ObservableField<T>.toFlowable(): Flowable<T> {
-    return Flowable.create({ emitter ->
-        get()?.let { nextValue -> emitter.onNext(nextValue) }
-
-        val callback = object : Observable.OnPropertyChangedCallback() {
-
-            override fun onPropertyChanged(sender: Observable?, propertyId: Int) {
-                get()?.let { nextValue -> emitter.onNext(nextValue) }
-            }
-        }
-
-        addOnPropertyChangedCallback(callback)
-        emitter.setCancellable { removeOnPropertyChangedCallback(callback) }
-    }, BackpressureStrategy.BUFFER)
 }

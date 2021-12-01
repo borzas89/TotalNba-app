@@ -41,14 +41,15 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
+
                 <ImageView
-                    android:id="@+id/imageHome"
-                    android:layout_width="104dp"
-                    android:layout_height="88dp"
-                    android:layout_marginStart="16dp"
+                    android:id="@+id/imageAway"
+                    android:layout_width="118dp"
+                    android:layout_height="94dp"
                     android:layout_weight="1"
                     android:scaleType="fitCenter"
-                    tools:src="@drawable/atl" />
+                    tools:src="@drawable/atl"
+                    android:transitionName="image" />
 
                 <LinearLayout
                     android:id="@+id/infoLayout"
@@ -71,16 +72,15 @@
 
 
                 <ImageView
-                    android:id="@+id/imageAway"
-                    android:layout_width="118dp"
-                    android:layout_height="94dp"
+                    android:id="@+id/imageHome"
+                    android:layout_width="104dp"
+                    android:layout_height="88dp"
+                    android:layout_marginStart="16dp"
                     android:layout_weight="1"
                     android:scaleType="fitCenter"
-                    tools:src="@drawable/atl"
-                    android:transitionName="image" />
-
-
+                    tools:src="@drawable/atl" />
             </LinearLayout>
+
         </LinearLayout>
 
         <LinearLayout
@@ -89,30 +89,6 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
-            <TextView
-                android:layout_weight="3"
-                android:id="@+id/homeOverall"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textAlignment="center"
-                android:textColor="@color/black"
-                android:textSize="19sp"
-                android:textStyle="bold"
-                android:text="@{viewmodel.homeOverall.overall.toString()}"
-                tools:text="114.5" />
-
-            <TextView
-                android:layout_weight="2"
-                android:id="@+id/titleOverall"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textAlignment="center"
-                android:textColor="@color/black"
-                android:textSize="19sp"
-                android:text="Avg Overalls"
-                android:textStyle="bold"
-                tools:text="Avg overalls" />
 
             <TextView
                 android:layout_weight="3"
@@ -126,54 +102,34 @@
                 android:text="@{viewmodel.awayOverall.overall.toString()}"
                 tools:text="112" />
 
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:id="@+id/homeOverallLayout"
-            android:weightSum="8"
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:layout_weight="3"
-                android:id="@+id/homeOverallHome"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textAlignment="center"
-                android:textColor="@color/black"
-                android:textSize="19sp"
-                android:textStyle="bold"
-                android:text="@{viewmodel.homeOverall.homeOverall.toString()}"
-                tools:text="114.5" />
 
             <TextView
                 android:layout_weight="2"
-                android:id="@+id/titleHomeOverall"
+                android:id="@+id/titleOverall"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:textAlignment="center"
                 android:textColor="@color/black"
                 android:textSize="19sp"
-                android:text="home Overalls"
+                android:text="Avg Overalls"
                 android:textStyle="bold"
-                tools:text="Home overalls" />
+                tools:text="Avg overalls" />
+
+
 
             <TextView
                 android:layout_weight="3"
-                android:id="@+id/awayHomeOverall"
+                android:id="@+id/homeOverall"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:textAlignment="center"
                 android:textColor="@color/black"
                 android:textSize="19sp"
                 android:textStyle="bold"
-                android:text="@{viewmodel.awayOverall.homeOverall.toString()}"
-                tools:text="112" />
+                android:text="@{viewmodel.homeOverall.overall.toString()}"
+                tools:text="114.5" />
 
         </LinearLayout>
-
 
         <LinearLayout
             android:id="@+id/awayOverallLayout"
@@ -221,6 +177,51 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/homeOverallLayout"
+            android:weightSum="8"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_weight="3"
+                android:id="@+id/homeOverallHome"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="19sp"
+                android:textStyle="bold"
+                android:text="@{viewmodel.homeOverall.homeOverall.toString()}"
+                tools:text="114.5" />
+
+            <TextView
+                android:layout_weight="2"
+                android:id="@+id/titleHomeOverall"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="19sp"
+                android:text="Home Overalls"
+                android:textStyle="bold"
+                tools:text="Home overalls" />
+
+            <TextView
+                android:layout_weight="3"
+                android:id="@+id/awayHomeOverall"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="19sp"
+                android:textStyle="bold"
+                android:text="@{viewmodel.awayOverall.homeOverall.toString()}"
+                tools:text="112" />
+
+        </LinearLayout>
+
+        <LinearLayout
             android:id="@+id/teamAvgOverallLayout"
             android:weightSum="8"
             android:orientation="horizontal"
@@ -229,15 +230,16 @@
 
             <TextView
                 android:layout_weight="3"
-                android:id="@+id/homeAvg"
+                android:id="@+id/awayAvg"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:textAlignment="center"
                 android:textColor="@color/black"
                 android:textSize="19sp"
                 android:textStyle="bold"
-                android:text="@{viewmodel.homeOverall.teamAvg.toString()}"
-                tools:text="114.5" />
+                android:text="@{viewmodel.awayOverall.teamAvg.toString()}"
+                tools:text="112" />
+
 
             <TextView
                 android:layout_weight="2"
@@ -251,17 +253,18 @@
                 android:textStyle="bold"
                 tools:text="team avg" />
 
+
             <TextView
                 android:layout_weight="3"
-                android:id="@+id/awayAvg"
+                android:id="@+id/homeAvg"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:textAlignment="center"
                 android:textColor="@color/black"
                 android:textSize="19sp"
                 android:textStyle="bold"
-                android:text="@{viewmodel.awayOverall.teamAvg.toString()}"
-                tools:text="112" />
+                android:text="@{viewmodel.homeOverall.teamAvg.toString()}"
+                tools:text="114.5" />
 
         </LinearLayout>
 
@@ -276,15 +279,15 @@
 
             <TextView
                 android:layout_weight="3"
-                android:id="@+id/homeAvgHome"
+                android:id="@+id/awayAvgOverall"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:textAlignment="center"
                 android:textColor="@color/black"
                 android:textSize="19sp"
                 android:textStyle="bold"
-                android:text="@{viewmodel.homeOverall.teamHomeAvg.toString()}"
-                tools:text="114.5" />
+                android:text="@{viewmodel.awayOverall.teamHomeAvg.toString()}"
+                tools:text="112" />
 
             <TextView
                 android:layout_weight="2"
@@ -300,15 +303,17 @@
 
             <TextView
                 android:layout_weight="3"
-                android:id="@+id/awayAvgOverall"
+                android:id="@+id/homeAvgHome"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:textAlignment="center"
                 android:textColor="@color/black"
                 android:textSize="19sp"
                 android:textStyle="bold"
-                android:text="@{viewmodel.awayOverall.teamHomeAvg.toString()}"
-                tools:text="112" />
+                android:text="@{viewmodel.homeOverall.teamHomeAvg.toString()}"
+                tools:text="114.5" />
+
+
 
         </LinearLayout>
 
@@ -323,15 +328,16 @@
 
             <TextView
                 android:layout_weight="3"
-                android:id="@+id/homeAvgAway"
+                android:id="@+id/awayAvgOverallAway"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:textAlignment="center"
                 android:textColor="@color/black"
                 android:textSize="19sp"
                 android:textStyle="bold"
-                android:text="@{viewmodel.homeOverall.teamAwayAvg.toString()}"
-                tools:text="114.5" />
+                android:text="@{viewmodel.awayOverall.teamAwayAvg.toString()}"
+                tools:text="112" />
+
 
             <TextView
                 android:layout_weight="2"
@@ -347,15 +353,16 @@
 
             <TextView
                 android:layout_weight="3"
-                android:id="@+id/awayAvgOverallAway"
+                android:id="@+id/homeAvgAway"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:textAlignment="center"
                 android:textColor="@color/black"
                 android:textSize="19sp"
                 android:textStyle="bold"
-                android:text="@{viewmodel.awayOverall.teamAwayAvg.toString()}"
-                tools:text="112" />
+                android:text="@{viewmodel.homeOverall.teamAwayAvg.toString()}"
+                tools:text="114.5" />
+
 
         </LinearLayout>
 
@@ -388,7 +395,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
 
     </LinearLayout>
 </layout>

@@ -3,22 +3,21 @@ package example.com.totalnba.ui.detail
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import example.com.totalnba.R
 import example.com.totalnba.data.network.model.Result
+import example.com.totalnba.databinding.ResultListItemBinding
+import example.com.totalnba.util.DateUtil.formatShortDate
 
-class ResultAdapter(): RecyclerView.Adapter<ResultViewHolder>() {
+class ResultAdapter(): RecyclerView.Adapter<ResultAdapter.ResultViewHolder>() {
     var results: List<Result> = emptyList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ResultViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.result_list_item, parent, false)
-        val viewHolder = ResultViewHolder(view)
-
-
-        return viewHolder
+        val inflater = LayoutInflater.from(parent.context)
+        val binding = ResultListItemBinding.inflate(inflater)
+        return ResultViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: ResultViewHolder, position: Int) {
-        val result = results.get(position)
+        val result = results[position]
         holder.configureWith(result)
     }
 
@@ -29,4 +28,13 @@ class ResultAdapter(): RecyclerView.Adapter<ResultViewHolder>() {
         notifyDataSetChanged()
     }
 
+    inner class ResultViewHolder(private val binding: ResultListItemBinding) : RecyclerView.ViewHolder(binding.root) {
+
+        fun configureWith(result: Result) {
+            binding.teamHome.text = result.homeName
+            binding.teamAway.text = result.awayName
+            binding.scoreHome.text = result.homeScore.toString()
+            binding.scoreAway.text = result.awayScore.toString()
+        }
+    }
 }

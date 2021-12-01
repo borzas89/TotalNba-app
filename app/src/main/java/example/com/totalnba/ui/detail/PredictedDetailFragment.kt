@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.get
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -68,9 +67,9 @@ class PredictedDetailFragment: BaseFragment<PredictedDetailViewModel>() {
     override fun onStart() {
         super.onStart()
 
-        viewModel.homeTeam.set(homeTeamName)
         viewModel.awayTeam.set(awayTeamName)
-        viewModel.matchTitle.set("$homeTeamName vs $awayTeamName")
+        viewModel.homeTeam.set(homeTeamName)
+        viewModel.matchTitle.set("$awayTeamName vs $homeTeamName")
 
         viewModel.getOverallsByTeams(homeTeamName, awayTeamName)
 
@@ -91,17 +90,17 @@ class PredictedDetailFragment: BaseFragment<PredictedDetailViewModel>() {
         binding.imageHome.setImageResource(imageResolverId(homeTeamName))
         binding.imageAway.setImageResource(imageResolverId(awayTeamName))
 
-        binding.tabLayout.addTab(binding.tabLayout.newTab().setText("Home team"))
         binding.tabLayout.addTab(binding.tabLayout.newTab().setText("Away team"))
+        binding.tabLayout.addTab(binding.tabLayout.newTab().setText("Home team"))
 
         binding.tabLayout.getTabAt(0)!!.select()
-        loadHomeResults()
+        loadAwayResults()
 
         binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
                 when(tab.position){
-                    0 -> loadHomeResults()
-                    1 -> loadAwayResults()
+                    0 -> loadAwayResults()
+                    1 -> loadHomeResults()
                     else -> loadHomeResults()
                 }
             }
@@ -147,8 +146,4 @@ class PredictedDetailFragment: BaseFragment<PredictedDetailViewModel>() {
         super.onDestroyView()
         bag.clear()
     }
-
-
-
-
 }
