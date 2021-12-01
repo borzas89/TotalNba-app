@@ -24,6 +24,12 @@
         android:layout_gravity="center_vertical"
         android:layout_height="150dp"/>
 
+    <Spinner
+        android:id="@+id/weekSpinner"
+        android:padding="12dp"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/predictionRecyclerView"
         tools:listitem="@layout/predicted_list_item"

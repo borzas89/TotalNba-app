@@ -24,6 +24,8 @@ class PredictedMatchViewHolder(itemView: View) : RecyclerView.ViewHolder(itemVie
 
     val predictedScore: TextView
 
+    val predictedSpread: TextView
+
     val awayScore: TextView
 
     val homeScore: TextView
@@ -37,17 +39,19 @@ class PredictedMatchViewHolder(itemView: View) : RecyclerView.ViewHolder(itemVie
        imageAway= itemView.findViewById(R.id.imageAway)
        homeScore = itemView.findViewById(R.id.homeScore)
        awayScore = itemView.findViewById(R.id.awayScore)
+       predictedSpread = itemView.findViewById(R.id.predictedSpread)
 
     }
 
     fun configureWith(predictions: PredictedMatch) {
 
         frameLayout.setBackgroundResource(backgroundResolverId(predictions.homeTeam.toString()))
-        predictedMatchTitle.text = predictions.homeTeam + " vs " + predictions.awayTeam
+        predictedMatchTitle.text =  predictions.awayTeam + " vs " + predictions.homeTeam
         homeScore.text = predictions.predictedHomeScore.toString()
         awayScore.text = predictions.predictedAwayScore.toString()
 
-        predictedScore.text = predictions.predictedScore?.let { roundingDouble(it) }
+        predictedScore.text = predictions.predictedTotal?.let { roundingDouble(it) }
+        predictedSpread.text = predictions.spread?.let { roundingDouble(it) }
 
         imageHome.setImageResource(imageResolverId(predictions.homeTeam.toString()))
         imageAway.setImageResource(imageResolverId(predictions.awayTeam.toString()))

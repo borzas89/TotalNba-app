@@ -38,19 +38,21 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
+
+
                <ImageView
-                   android:id="@+id/imageHome"
-                   android:layout_width="104dp"
-                   android:layout_height="88dp"
-                   android:layout_marginStart="16dp"
+                   android:id="@+id/imageAway"
+                   android:layout_width="118dp"
+                   android:layout_height="94dp"
                    android:layout_weight="1"
                    android:scaleType="fitCenter"
-                   android:src="@drawable/bkn" />
+                   android:src="@drawable/atl"
+                   android:transitionName="image" />
 
                <LinearLayout
                    android:id="@+id/infoLayout"
                    android:layout_weight="1"
-                   android:orientation="horizontal"
+                   android:orientation="vertical"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content">
 
@@ -64,19 +66,30 @@
                        android:textStyle="bold"
                        tools:text="225.4" />
 
+                   <TextView
+                       android:id="@+id/predictedSpread"
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:textAlignment="center"
+                       android:textColor="@color/black"
+                       android:textSize="19sp"
+                       android:textStyle="bold"
+                       tools:text="10" />
+
+
+
 
 
                </LinearLayout>
 
-
                <ImageView
-                   android:id="@+id/imageAway"
-                   android:layout_width="118dp"
-                   android:layout_height="94dp"
+                   android:id="@+id/imageHome"
+                   android:layout_width="104dp"
+                   android:layout_height="88dp"
+                   android:layout_marginStart="16dp"
                    android:layout_weight="1"
                    android:scaleType="fitCenter"
-                   android:src="@drawable/atl"
-                   android:transitionName="image" />
+                   android:src="@drawable/bkn" />
 
 
            </LinearLayout>
@@ -92,6 +105,16 @@
             android:layout_height="0dp"
             android:orientation="horizontal">
 
+              <TextView
+                  android:id="@+id/awayScore"
+                  android:layout_weight="1"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:textAlignment="center"
+                  android:textColor="@color/black"
+                  android:textSize="16sp"
+                  android:textStyle="bold"
+                  tools:text="112" />
 
               <TextView
                   android:id="@+id/homeScore"
@@ -102,17 +125,6 @@
                   android:textColor="@color/black"
                   android:textStyle="bold"
                   android:textSize="16sp"
-                  tools:text="112" />
-
-              <TextView
-                  android:id="@+id/awayScore"
-                  android:layout_weight="1"
-                  android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:textAlignment="center"
-                  android:textColor="@color/black"
-                  android:textSize="16sp"
-                  android:textStyle="bold"
                   tools:text="112" />
 
 

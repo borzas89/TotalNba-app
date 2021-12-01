@@ -1,83 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:id="@+id/result_item"
-    android:padding="4dp"
-    android:layout_margin="4dp"
-    android:layout_height="wrap_content">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-        <LinearLayout
-            android:weightSum="4"
-            android:id="@+id/titleLayoutBottom"
-            android:layout_width="match_parent"
+    <data>
+        <import type="android.view.View" />
+    </data>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/result_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:padding="4dp">
+
+
+        <TextView
+            android:id="@+id/teamAway"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_margin="4dp"
+            android:layout_marginStart="4dp"
+            android:padding="4dp"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/teamHome"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Chicago Bulls" />
 
-            <TextView
-                android:id="@+id/eventDate"
-                android:layout_weight="1"
-                android:visibility="gone"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textAlignment="center"
-                android:textColor="@color/black"
-                android:textStyle="bold"
-                android:textSize="16sp"
-                tools:text="05.04" />
+        <TextView
+            android:id="@+id/teamHome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:layout_marginEnd="12dp"
+            android:padding="4dp"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="LA Clippers" />
 
-            <TextView
-                android:id="@+id/teamHome"
-                android:layout_weight="1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textAlignment="center"
-                android:textColor="@color/black"
-                android:textStyle="bold"
-                android:textSize="14sp"
-                android:maxLines="3"
-                android:lines="3"
-                tools:text="LA Clippers" />
-
-            <TextView
-                android:id="@+id/teamAway"
-                android:layout_weight="1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textAlignment="center"
-                android:textColor="@color/black"
-                android:textStyle="bold"
-                android:maxLines="3"
-                android:lines="3"
-                android:textSize="14sp"
-                tools:text="Chicago Bulls" />
-
-            <TextView
-                android:layout_weight="1"
-                android:id="@+id/scoreHome"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textAlignment="center"
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                tools:text="113" />
+        <TextView
+            android:id="@+id/scoreAway"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:padding="4dp"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/teamAway"
+            app:layout_constraintStart_toStartOf="@+id/teamAway"
+            app:layout_constraintTop_toBottomOf="@id/teamAway"
+            tools:text="112" />
 
 
-            <TextView
-                android:layout_weight="1"
-                android:id="@+id/scoreAway"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textAlignment="center"
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                tools:text="112" />
+        <TextView
+            android:id="@+id/scoreHome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:padding="4dp"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/teamHome"
+            app:layout_constraintStart_toStartOf="@+id/teamHome"
+            app:layout_constraintTop_toBottomOf="@id/teamHome"
+            tools:text="113" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="20dp" />
 
 
-
-        </LinearLayout>
-
-
-</FrameLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
