@@ -5,14 +5,14 @@ plugins {
 }
 
 android {
-    compileSdkVersion 30
+    compileSdkVersion 31
     buildToolsVersion "30.0.3"
 
 
     defaultConfig {
         applicationId "example.com.totalnba"
-        minSdkVersion 19
-        targetSdkVersion 30
+        minSdkVersion 21
+        targetSdkVersion 31
         versionCode 1
         versionName "1.0"
 
@@ -81,8 +81,13 @@ dependencies {
     //region network specific
     implementation 'com.google.code.gson:gson:2.8.4'
 
+    implementation 'androidx.core:core-splashscreen:1.0.0-beta01'
+
     // Timber
     implementation 'com.jakewharton.timber:timber:4.7.1'
 
     implementation 'joda-time:joda-time:2.10.10'
+
+    implementation 'com.github.prolificinteractive:material-calendarview:2.0.0'
+    implementation 'com.jakewharton.threetenabp:threetenabp:1.1.1'
 }

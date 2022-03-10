@@ -11,7 +11,7 @@ import io.reactivex.processors.BehaviorProcessor
 
 open class BaseViewModel  : ViewModel() {
 
-    private val compositeDisposable = CompositeDisposable()
+    val disposables = CompositeDisposable()
 
     private val loadingProcessor = BehaviorProcessor.create<Boolean>()
 
@@ -44,6 +44,6 @@ open class BaseViewModel  : ViewModel() {
 
     override fun onCleared() {
         super.onCleared()
-        compositeDisposable.clear()
+        disposables.clear()
     }
 }
