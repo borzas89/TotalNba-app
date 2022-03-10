@@ -15,6 +15,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <com.prolificinteractive.materialcalendarview.MaterialCalendarView
+        android:id="@+id/calendar_view_single"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:mcv_selectionMode="single"
+        app:mcv_selectionColor="@color/design_default_color_primary"
+        app:mcv_calendarMode="week"
+        />
+
     <ProgressBar
         android:id="@+id/progressBar"
         android:visibility="@{viewmodel.isLoadingProgress() ? View.VISIBLE : View.GONE}"
@@ -24,11 +33,13 @@
         android:layout_gravity="center_vertical"
         android:layout_height="150dp"/>
 
-    <Spinner
-        android:id="@+id/weekSpinner"
-        android:padding="12dp"
+    <TextView
+        android:id="@+id/tvError"
+        android:layout_margin="25dp"
         android:layout_width="match_parent"
-        android:layout_height="80dp"/>
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:text="@{viewmodel.errorTitle}"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/predictionRecyclerView"

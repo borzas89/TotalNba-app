@@ -5,7 +5,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import example.com.totalnba.data.network.model.Result
 import example.com.totalnba.databinding.ResultListItemBinding
-import example.com.totalnba.util.DateUtil.formatShortDate
 
 class ResultAdapter(): RecyclerView.Adapter<ResultAdapter.ResultViewHolder>() {
     var results: List<Result> = emptyList()

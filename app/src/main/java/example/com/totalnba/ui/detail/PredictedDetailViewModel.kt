@@ -8,14 +8,12 @@ import example.com.totalnba.data.network.model.Overall
 import example.com.totalnba.data.network.model.Result
 import example.com.totalnba.util.disposedBy
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 class PredictedDetailViewModel @Inject constructor(
-    private val api: TotalNbaApi,
-
+    private val api: TotalNbaApi
     ) : BaseViewModel() {
 
     val overallList = BehaviorRelay.createDefault(listOf<Overall>())
@@ -30,8 +28,7 @@ class PredictedDetailViewModel @Inject constructor(
     val awayOverall = ObservableField<Overall>()
 
     val matchTitle = ObservableField<String>()
-
-    private val bag = CompositeDisposable()
+    val errorTitle = ObservableField<String>()
 
     fun getOverallsByTeams(homeName: String, awayName: String) {
         api.getOverallByTeams(homeName, awayName)
@@ -41,7 +38,7 @@ class PredictedDetailViewModel @Inject constructor(
                 homeOverall.set(overall[0])
                 awayOverall.set(overall[1])
             }
-            .disposedBy(bag)
+            .disposedBy(disposables)
     }
 
     fun getHomeResults(homeTeam: String) {
@@ -55,7 +52,7 @@ class PredictedDetailViewModel @Inject constructor(
                     }
 
                 }, onError = {
-
+                    errorTitle.set("Something went wrong, try again later..")
                 }
             )
 
@@ -75,10 +72,5 @@ class PredictedDetailViewModel @Inject constructor(
 
                 }
             )
-    }
-
-    override fun onCleared() {
-        super.onCleared()
-        bag.clear()
     }
 }
