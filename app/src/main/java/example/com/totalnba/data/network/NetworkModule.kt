@@ -13,7 +13,7 @@ import javax.inject.Singleton
 class NetworkModule {
 
     companion object {
-      private const val API_URL ="https://totalstat.herokuapp.com/"
+      private const val API_URL ="https://totalnba.herokuapp.com/"
     }
 
     @Provides

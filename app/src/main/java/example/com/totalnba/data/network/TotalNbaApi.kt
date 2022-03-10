@@ -16,6 +16,9 @@ interface TotalNbaApi {
     @GET("api/prediction/week/{week}/")
     fun getPredictedMatchesByWeek(@Path("week") weekName: String): Single<List<PredictedMatch>>
 
+    @GET("api/prediction/day/{day}/")
+    fun getPredictedMatchesByDay(@Path("day") dayName: String): Single<List<PredictedMatch>>
+
     @GET("api/api/results/all-overalls/")
     fun getAverageOveralls(): Single<List<Overall>>
 

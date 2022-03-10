@@ -1,6 +1,7 @@
 package example.com.totalnba.data.network.model
 
 import com.google.gson.annotations.SerializedName;
+import java.util.Date
 
 class PredictedMatch {
 
@@ -36,4 +37,8 @@ class PredictedMatch {
 
     @SerializedName("weekNumber")
     val weekNumber: Int? = null
+
+    @SerializedName("matchDate")
+    val matchDate: Date? = null
+
 }
