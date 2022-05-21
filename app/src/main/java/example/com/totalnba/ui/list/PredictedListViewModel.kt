@@ -16,7 +16,7 @@ import java.util.Locale
 import javax.inject.Inject
 
 class PredictedListViewModel @Inject constructor(
-    private val api: TotalNbaApi,
+    private val api: TotalNbaApi
 ) : BaseViewModel() {
 
     val predictions = BehaviorRelay.createDefault(listOf<PredictedMatch>())
@@ -28,13 +28,6 @@ class PredictedListViewModel @Inject constructor(
     fun formattedToday(): String {
         val formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy", Locale.ENGLISH)
         return formatter.format(LocalDate.now().atStartOfDay())
-    }
-
-    fun getWeeksList(): List<String> {
-        return listOf("Week 0", "Week 1", "Week 2", "Week 3", "Week 4", "Week 5",
-            "Week 6", "Week 7", "Week 8", "Week 9", "Week 10",
-            "Week 11", "Week 12", "Week 13", "Week 14", "Week 15",
-            "Week 16", "Week 17", "Week 18", "Week 19", "Week 20", "Week 21")
     }
 
     init {
